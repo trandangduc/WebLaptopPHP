@@ -16,7 +16,7 @@ class SanPham {
     public $TrangThai;
     public $SoLuong;
 
-    public function __construct($db) {
+    public function __construct() {
         $this->conn = getConnection();
     }
 
@@ -24,7 +24,11 @@ class SanPham {
         $query = "SELECT * FROM " . $this->table;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $stmt;
+        $sp = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $sp[] = $row;
+        }
+        return $sp;
     }
 
     public function getById($id) {

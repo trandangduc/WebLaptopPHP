@@ -11,7 +11,7 @@
                                 </li>
                                 <li class="dropdown-holder">
                                     <a href="#">Cửa hàng <i class="ion-ios-arrow-down"></i></a>
-                                    <?php include 'getDanhMuc.php'; ?>
+                             
                                 </li>
                                 <li class=""><a href="about.php">Về chúng tôi</a></li>
                                 <li class=""><a href="contact.php">Liên hệ</a></li>

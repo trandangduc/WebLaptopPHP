@@ -4,7 +4,7 @@ function getConnection() {
     $host = "localhost";
     $username = "root"; 
     $password = "";
-    $database = "database_name";
+    $database = "storelaptop";
 
     try {
         $conn = new PDO("mysql:host=$host;dbname=$database", $username, $password);

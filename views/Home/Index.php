@@ -1,31 +1,35 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-    Layout = "~/Views/Shared/_LayoutHome.cshtml";
-}
-@model IEnumerable <TMDTLaptop.Models.SanPham>
+﻿<?php
+$title = "Trang chủ | WebLaptopPHP";
+ob_start();
+?>
 
 <div class="uren-slider_area">
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="main-slider slider-navigation_style-2">
-                    @foreach (var banner in ViewBag.Banners)
+                <?php
+
+                    foreach ($banner as $b)
                     {
-                        <div class="single-slide">
+                        echo '<div class="single-slide">
                             <div class="banner-image">
-                                <img src="~/assets/images/banner/@banner.HinhAnh" alt="Banner" class="img-fluid w-100 h-100" />
+                                <img src="./assets/images/banner/'.$b['HinhAnh'].'" alt="Banner" class="img-fluid w-100 h-100" />
                             </div>
                             <div class="slider-content">
-                                <h3>@banner.MoTa</h3>
+                                <h3>'.$b['MoTa'].'</h3>
                                
                             </div>
-                        </div>
+                        </div>';
+                        
                     }
+                    ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <script>
     $(document).ready(function () {
         $('.main-slider').slick({
@@ -158,55 +162,66 @@
                                                 {"breakpoint":767, "settings": {"slidesToShow": 1}},
                                                 {"breakpoint":480, "settings": {"slidesToShow": 1}}
                                             ]'>
-
-                    @foreach (var product in Model)
-                    {
-                        <div class="product-slide_item">
-                            <div class="inner-slide">
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <a>
-                                            <img class="primary-img" style="width: 100%; height: 200px;" src="~/assets/images/product/@product.MaSanPham/@product.HinhAnh" alt="@product.TenSanPham">
-                                            <img class="secondary-img" style="width: 100%; height: 200px;" src="~/assets/images/product/@product.MaSanPham/@product.HinhAnh" alt="@product.TenSanPham">
-                                        </a>
-                                        <div class="sticker">
-                                            <span class="sticker">New</span>
-                                        </div>
-                                        <div class="add-actions">
-                                            <ul>
-
-                                                <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter">
-                                                    <a href="@Url.Action("ChiTietSanPham","Home",new {id=product.MaSanPham})" data-toggle="tooltip" data-placement="top" title="Quick View">
-                                                        <i class="ion-android-open"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <div class="product-desc_info">
-                                            <h6><a class="product-name" href="single-product.html">@product.TenSanPham</a></h6>
-                                            <div class="price-box">
-                                                @if (product.GiaMoi != null)
-                                                {
-                                                    <span class="old-price">@product.Gia.ToString("N0") đ</span>
-                                                    <span class="new-price">@product.GiaMoi.Value.ToString("N0") đ</span>
-                                                }
-                                                else
-                                                {
-                                                    <span class="new-price">@product.Gia.ToString("N0") đ</span>
-                                                }
-
-
+                            <?php
+                            foreach ($sp as $s)
+                           
+                            {
+                                 echo'
+                                <div class="product-slide_item">
+                                    <div class="inner-slide">
+                                        <div class="single-product">
+                                            <div class="product-img">
+                                                <a>
+                                                    <img class="primary-img" style="width: 100%; height: 200px;" src="./assets/images/product/'.$s['MaSanPham'].'/'.$s['HinhAnh'].'" alt="'.$s['TenSanPham'].'">
+                                                    <img class="secondary-img" style="width: 100%; height: 200px;" src="./assets/images/product/'.$s['MaSanPham'].'/'.$s['HinhAnh'].'" alt="'.$s['TenSanPham'].'">
+                                                </a>
+                                                <div class="sticker">
+                                                    <span class="sticker">New</span>
+                                                </div>
+                                                <div class="add-actions">
+                                                    <ul>
+        
+                                                        <li class="quick-view-btn" data-toggle="modal" data-target="#exampleModalCenter">
+                                                            <a href="/Home/ChiTietSanPham?id='.$s['MaSanPham'].'" data-toggle="tooltip" data-placement="top" title="Quick View">
+                                                                <i class="ion-android-open"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="product-content">
+                                                <div class="product-desc_info">
+                                                    <h6><a class="product-name" href="single-product.html">'.$s['TenSanPham'].'</a></h6>
+                                                    <div class="price-box">';
+                                                        if ($s['GiaMoi']!= null)
+                                                        {
+                                                          echo  ' <span class="old-price">'.$s['Gia'].' đ</span>
+                                                            <span class="new-price">'.$s['GiaMoi'].'đ</span>';
+                                                        }
+                                                        else
+                                                        {
+                                                           echo '<span class="new-price">'.$s['Gia'].' đ</span>';
+                                                        }
+        
+        echo'
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
+                                </div>';
+                            }
+                            ?>
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
+<?php
+// Lấy nội dung đã lưu trong buffer
+$content = ob_get_clean();
+
+// Gọi layout chính
+include __DIR__ . '/../Layout/LayoutHome.php';
+?>

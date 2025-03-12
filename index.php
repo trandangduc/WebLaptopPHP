@@ -3,7 +3,7 @@ class Router {
     private $database;
     
     public function __construct() {
-        require_once '../config.php';
+        require_once 'config.php';
         $this->database = getConnection();
     }
 
@@ -11,15 +11,17 @@ class Router {
         // Lấy URL và tách thành mảng
         $path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
         $path = preg_replace('/^WebLaptopPHP\//', '', $path); // Bỏ 'WebLaptop/' từ URL
-        $parts = explode('/', $path);
         
+        $parts = explode('/', $path);
+       
         // Xác định controller và action
         $controller = ucfirst($parts[0]) . 'Controller';
+      
         $action = $parts[1] ?? 'index';
         $id = $parts[2] ?? null;
       
         // Kiểm tra và chạy controller
-        $controllerPath = "controllers/$controller.php";
+        $controllerPath = "controller/$controller.php";
       
         if (file_exists($controllerPath)) {
             require_once $controllerPath;

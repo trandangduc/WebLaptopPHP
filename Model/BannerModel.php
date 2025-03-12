@@ -11,7 +11,11 @@ class Banner {
     public function getAllBanners() {
         $stmt = $this->db->prepare("SELECT * FROM Banner");
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $banner = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $banner[] = $row;
+        }
+        return $banner;
     }
     
     // Lấy một banner theo ID
