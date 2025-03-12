@@ -6,7 +6,7 @@
                 <div class="col-lg-4">
                     <div class="footer-widgets_info">
                         <div class="footer-widgets_logo">
-                            <a href="@Url.Action("Index","Home")" class="logo-text">
+                            <a href="#" class="logo-text">
                                 CỬA HÀNG LAPTOP
                             </a>
                         </div>

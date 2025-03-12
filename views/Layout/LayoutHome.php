@@ -4,6 +4,8 @@
     <meta name="viewport" content="width=device-width" />
     <title><?php echo $title; ?></title>
 
+
+    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/assets/css/vendor/bootstrap.min.css">
     <!-- Fontawesome -->

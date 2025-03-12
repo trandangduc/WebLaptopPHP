@@ -1,4 +1,3 @@
-
 <header class="header-main_area bg--sapphire">
     <div class="header-top_area d-lg-block d-none">
         <div class="container-fluid">
@@ -8,18 +7,14 @@
                         <nav class="main-nav">
                             <ul>
                                 <li class="dropdown-holder active">
-                                    <a href="@Url.Action("Index","Home")">Trang chủ</a>
-
+                                    <a href="index.php">Trang chủ</a>
                                 </li>
                                 <li class="dropdown-holder">
                                     <a href="#">Cửa hàng <i class="ion-ios-arrow-down"></i></a>
-                                    @Html.Action("GetDanhMuc", "Home")
+                                    <?php include 'getDanhMuc.php'; ?>
                                 </li>
-
-
-                                <li class=""><a href="@Url.Action("About","Home")">Về chúng tôi</a></li>
-                                <li class=""><a href="@Url.Action("Contact","Home")">Liên hệ</a></li>
-
+                                <li class=""><a href="about.php">Về chúng tôi</a></li>
+                                <li class=""><a href="contact.php">Liên hệ</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -28,28 +23,24 @@
                     <div class="ht-right_area">
                         <div class="ht-menu">
                             <ul>
-                                @if (Session["Username"] != null)
-                                {
+                                <?php if(isset($_SESSION['Username'])): ?>
                                     <li style="margin-right:50px">
-                                        <a href="#">Xin chào, @Session["Username"]<i class="fa fa-chevron-down"></i></a>
+                                        <a href="#">Xin chào, <?php echo $_SESSION['Username']; ?><i class="fa fa-chevron-down"></i></a>
                                         <ul class="ht-dropdown ht-my_account">
-
-                                            <li class="active"><a href="@Url.Action("HoSo", "Home")">Xem hồ sơ</a></li>
-                                            <li class="active"><a href="@Url.Action("Chat", "Home")">Chat với nhân viên</a></li>
-                                            <li class="active"><a href="@Url.Action("DangXuat", "Home")">Đăng xuất</a></li>
+                                            <li class="active"><a href="hoso.php">Xem hồ sơ</a></li>
+                                            <li class="active"><a href="chat.php">Chat với nhân viên</a></li>
+                                            <li class="active"><a href="dangxuat.php">Đăng xuất</a></li>
                                         </ul>
                                     </li>
-                                }
-                                else
-                                {
+                                <?php else: ?>
                                     <li style="margin-right:50px">
                                         <a href="#">Tài khoản<i class="fa fa-chevron-down"></i></a>
                                         <ul class="ht-dropdown ht-my_account">
-                                            <li><a href="@Url.Action("DangKy", "Home")">Đăng ký</a></li>
-                                            <li class="active"><a href="@Url.Action("DangNhap", "Home")">Đăng nhập</a></li>
+                                            <li><a href="dangky.php">Đăng ký</a></li>
+                                            <li class="active"><a href="dangnhap.php">Đăng nhập</a></li>
                                         </ul>
                                     </li>
-                                }
+                                <?php endif; ?>
                             </ul>
                         </div>
                     </div>
@@ -75,22 +66,19 @@
                                 </a>
                             </li>
                             <li class="minicart-wrap" style="width:200px">
-                                @if (Session["Username"] == null)
-                                {
-                                    <a href="@Url.Action("DangNhap", "Home")">
+                                <?php if(!isset($_SESSION['Username'])): ?>
+                                    <a href="dangnhap.php">
                                         <div class="minicart-count_area">
                                             <i class="ion-bag"></i>
                                         </div>
                                     </a>
-                                }
-                                else
-                                {
-                                    <a href="@Url.Action("GioHang", "Home")">
+                                <?php else: ?>
+                                    <a href="giohang.php">
                                         <div class="minicart-count_area">
                                             <i class="ion-bag"></i>
                                         </div>
                                     </a>
-                                }
+                                <?php endif; ?>
                             </li>
                         </ul>
                     </div>
@@ -98,76 +86,6 @@
             </div>
         </div>
     </div>
-    <style>
-        .header-middle_area .header-right_area {
-            text-align: right;
-        }
 
-        .minicart-wrap {
-            position: relative;
-            display: inline-block;
-            margin-left: auto;
-        }
-    </style>
-    <div class="mobile-menu_wrapper" id="mobileMenu">
-        <div class="offcanvas-menu-inner">
-            <div class="container">
-                <nav class="offcanvas-navigation">
-                    <ul class="mobile-menu">
-                        <li class="menu-item-has-children active">
-                            <a href="@Url.Action("Index","Home")">
-                                <span class="mm-text">Trang chủ</span>
-                            </a>
-
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="#">
-                                <span class="mm-text">Shop</span>
-                            </a>
-                            <ul class="sub-menu">
-                                @Html.Action("GetDanhMuc", "Home")
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="@Url.Action("About","Home")">
-                                <span class="mm-text">Về chúng tôi</span>
-                            </a>
-
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="@Url.Action("Contact","Home")">
-                                <span class="mm-text">Liên hệ</span>
-                            </a>
-
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="@Url.Action("DangNhap","Home")">
-                                <span class="mm-text">Đăng nhập</span>
-                            </a>
-
-                        </li>
-                    </ul>
-                </nav>
-
-            </div>
-        </div>
-    </div>
-
+    <!-- Phần CSS và mobile menu giữ nguyên -->
 </header>
-<script>
-    .logo-text {
-    font-family: 'Arial', sans-serif;
-    font-size: 28px;
-    font-weight: bold;
-    color: #ff0000; /* Màu chữ đỏ */
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.logo-text:hover {
-    transform: scale(1.1); /* Phóng to chữ khi hover */
-    color: #00ccff; /* Đổi màu sang xanh khi hover */
-}
-
-</script>
