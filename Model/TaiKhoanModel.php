@@ -1,4 +1,5 @@
 <?php
+require_once 'config.php';
 class TaiKhoan {
     private $conn;
     private $table = "TaiKhoan";
@@ -14,8 +15,8 @@ class TaiKhoan {
     public $NgayTao;
     public $TrangThai;
 
-    public function __construct($db) {
-        $this->conn = $db;
+    public function __construct() {
+        $this->conn =  getConnection();
     }
 
     public function create() {

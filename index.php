@@ -3,7 +3,7 @@ class Router {
     private $database;
     
     public function __construct() {
-        require_once 'database.php';
+        require_once '../config.php';
         $this->database = getConnection();
     }
 

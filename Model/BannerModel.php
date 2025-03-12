@@ -1,9 +1,10 @@
 <?php
+require_once 'config.php';
 class Banner {
     private $db;
     
-    public function __construct($database) {
-        $this->db = $database;
+    public function __construct() {
+        $this->db = getConnection();
     }
     
     // Lấy tất cả các banner
